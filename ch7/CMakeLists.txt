@@ -12,6 +12,10 @@ find_package( OpenCV 3.1 REQUIRED )
 find_package( G2O REQUIRED )
 find_package( CSparse REQUIRED )
 
+# 寻找Ceres库并添加它的头文件
+find_package( Ceres REQUIRED )
+include_directories( ${CERES_INCLUDE_DIRS} )
+
 include_directories( 
     ${OpenCV_INCLUDE_DIRS} 
     ${G2O_INCLUDE_DIRS}
@@ -34,6 +38,7 @@ add_executable( pose_estimation_3d2d pose_estimation_3d2d.cpp )
 target_link_libraries( pose_estimation_3d2d 
    ${OpenCV_LIBS}
    ${CSPARSE_LIBRARY}
+   ${CERES_LIBRARIES}
    g2o_core g2o_stuff g2o_types_sba g2o_csparse_extension
 )
 
